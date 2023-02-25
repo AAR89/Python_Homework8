@@ -26,9 +26,9 @@ import os
 os.chdir("C:\Жесткий диск\copy3\Курсы\Python sem\Homework8")
 
 db_path = 'phone_book.json'
-welcome = 'Enter command: 1 - read & show | 2 - add record | 3 - search | 4 - init DB | 5 - delete | q - Quit\n'
+welcome = 'Enter command: 1 - read & show | 2 - add record | 3 - search | 4 - init DB | 5 - delete | 6 - edit q - Quit\n'
 
-phone_book = {}
+phone_book = []
 
 
 def print_book(book):
@@ -58,7 +58,7 @@ def new_record(book):
     k = input("Put new name: ")
     a = {}
     a['phone'] = list(input('Put phone: ').split())
-    a['birthday'] = inPut('Put birthday: ')
+    a['birthday'] = input('Put birthday: ')
     book[k] = a
     print('Запись внесена.')
 
@@ -74,9 +74,32 @@ def search_db(employer, name):
 
 def delete(book, name):
     for k in list(book):
-        if book['name'] == name:
+        if book[k]['name'] == name:
             del book[k]
     print(book)
+
+
+def edit(book):
+    a = input("Введите id абонента: ")
+    for i in list(book)[:]:
+        if a in i:
+            print(f'Редактировать: {i} \n')
+            flag = True
+            while flag:
+                print('Изменить Фамилию = 1 \n'
+                      'Изменить Имя = 2 \n'
+                      'Изменить Отчество = 3 \n'
+                      'Изменить телефон = 4 \n')
+                n = int(input('Введите нужную цифру: '))
+                if n == 1 or n == 2 or n == 3 or n == 4:
+                    x = input('Введите новый элемент: ')
+                    i.pop(n)
+                    i.insert(n, x)
+                    print(i)
+                    break
+                else:
+                    print('Не верно указан индекс элемента \n')
+            break
 
 
 def init_db(path, db):
@@ -89,6 +112,8 @@ def init_db(path, db):
 try:
     phone_book = load_db(db_path)
 except:
+    # phone_book = [['1', 'Иванов', 'Иван', 'Иванович', '+79181111111'], ['2', 'Петров', 'Роман', 'Иванович', '+79532222222'], ['3', 'Сидоров', 'Иван',
+    #                                                                                                                           'Семенович', '+79183333333'], ['4', 'Иванов', 'Петр', 'Иванович', '+79054444444'], ['5', 'Борисов', 'Виктор', 'Семенович', '+79184241412']]
     phone_book = {'id1': {'name': "Джон", 'Familia': "Трамп", 'Otchestvo': "Дональдович", 'Phone': "33-33-33"},
                   'id2': {'name': "Владимир", 'Familia': "Путин", 'Otchestvo': "Владимирович", 'Phone': "8(912)911911911"},
                   'id3': {'name': "Владимир", 'Familia': "Иванов", 'Otchestvo': "Владимирович", 'Phone': None}}
@@ -112,6 +137,9 @@ def action():
         elif action == '5':
             name = input("Put the name: ")
             delete(phone_book, name)
-            
+        elif action == '6':
+            edit(phone_book)
+
+
 action()
 save_db(db_path, phone_book)
