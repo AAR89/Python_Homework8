@@ -57,12 +57,13 @@ def load_db(path):
 def new_record(book):
     k = input("Put new name: ")
     a = {}
-    a['phone'] = list(input('put phone: ').split())
-    a['birthday'] = input('put birthday: ')
+    a['phone'] = list(input('Put phone: ').split())
+    a['birthday'] = inPut('Put birthday: ')
     book[k] = a
+    print('Запись внесена.')
 
 
-def my_find(employer, name):
+def search_db(employer, name):
     for k, v in employer.items():
         if v['name'] == name:
             print(v['Phone'])
@@ -72,10 +73,10 @@ def my_find(employer, name):
 
 
 def delete(book, name):
-    for k,v in book.items():
-        if v['name'] == name:
-            del book['name']
-            return
+    for k in list(book):
+        if book['name'] == name:
+            del book[k]
+    print(book)
 
 
 def init_db(path, db):
@@ -104,8 +105,8 @@ def action():
         elif action == '2':
             new_record(phone_book)
         elif action == '3':
-            name_id1 = input("Введите имя: ")
-            my_find(phone_book, name_id1)
+            name_id1 = input("Put the name: ")
+            search_db(phone_book, name_id1)
         elif action == '4':
             init_db(db_path, phone_book)
         elif action == '5':
