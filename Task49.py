@@ -65,8 +65,8 @@ def new_record(book):
 def search_db(book):
     result = []
     for k,v in book.items():
-        if book[k] == 'book':
-            print(book[k])
+        if book[''] == book:
+            print(book[''])
         return result
 
 
