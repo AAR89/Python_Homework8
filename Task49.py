@@ -28,7 +28,7 @@ os.chdir("C:\Жесткий диск\copy3\Курсы\Python sem\Homework8")
 db_path = 'phone_book.json'
 welcome = 'Enter command: 1 - read & show | 2 - add record | 3 - search | 4 - init DB | 5 - delete | 6 - edit q - Quit\n'
 
-phone_book = []
+phone_book = {}
 
 
 def print_book(book):
