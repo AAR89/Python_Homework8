@@ -65,7 +65,7 @@ def new_record(book):
 def search_db(book):
     result = []
     for k,v in book.items():
-        if book[k] == book:
+        if book[k] == 'book':
             print(book[k])
         return result
 
@@ -126,14 +126,14 @@ def action():
             print('3. Поиск по номеру телефона.')
             deleting = (input('Введите номер пункта: '))
 
-            if deleting == 1:
+            if deleting == '1':
                 search = input('Введите фамилию: ')
                 user_id = input('Введите id записи: ')
-            elif deleting == 2:
+            elif deleting == '2':
                 search = input('Введите имя: ')
                 user_id = input('Введите id записи: ')
 
-            elif deleting == 3:
+            elif deleting == '3':
                 search = input('Введите номер телефона: ')
                 user_id = input('Введите id записи: ')
                 new_number = input('Введите новый номер телефона: ')
