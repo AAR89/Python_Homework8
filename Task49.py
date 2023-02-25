@@ -21,12 +21,12 @@
 
 import json
 
+import os
+
+os.chdir("C:\Жесткий диск\copy3\Курсы\Python sem\Homework8")
+
 db_path = 'phone_book.json'
 welcome = 'Enter command: 1 - read & show | 2 - add record | 3 - search | 4 - init DB | 5 - delete | q - Quit\n'
-
-db_file_name = ''
-db = []
-global_id = 0
 
 phone_book = {}
 
@@ -62,32 +62,20 @@ def new_record(book):
     book[k] = a
 
 
-def search_db(book):
-    result = []
+def my_find(employer, name):
+    for k, v in employer.items():
+        if v['name'] == name:
+            print(v['Phone'])
+            return
+
+    print('Не найдено: "{}"'.format(name))
+
+
+def delete(book, name):
     for k,v in book.items():
-        if book[''] == book:
-            print(book[''])
-        return result
-
-
-def delete(id=''):
-    global global_id
-    global db
-    global db_file_name
-    if (id == ''):
-        print('specify id for delete')
-        return
-
-    for row in db:
-        if (row[0] == id):
-            db.remove(row)
-            break
-
-    # with open(db_file_name, 'w', newline='') as csv_file:
-    #     writer = csv.writer(csv_file, delimiter=',',
-    #                         quotechar='\'', quoting=csv.QUOTE_MINIMAL)
-    #     for row in db:
-    #         writer.writerow(row)
+        if v['name'] == name:
+            del book['name']
+            return
 
 
 def init_db(path, db):
@@ -100,10 +88,11 @@ def init_db(path, db):
 try:
     phone_book = load_db(db_path)
 except:
-    phone_book = {
-        'Миша гараж': {'phone': ['72443351195', '72627397543'], 'birthday': '11-02-2010', 'email': "mail@mail.ru"},
-        'Sasha': {'phone': ['78436840045', '77554802591']}}
-    print('Базу данных не найдена, создаём тестовую БД')
+    phone_book = {'id1': {'name': "Джон", 'Familia': "Трамп", 'Otchestvo': "Дональдович", 'Phone': "33-33-33"},
+                  'id2': {'name': "Владимир", 'Familia': "Путин", 'Otchestvo': "Владимирович", 'Phone': "8(912)911911911"},
+                  'id3': {'name': "Владимир", 'Familia': "Иванов", 'Otchestvo': "Владимирович", 'Phone': None}}
+
+print('Базу данных не найдена, создаём тестовую БД')
 
 
 def action():
@@ -116,31 +105,24 @@ def action():
             # print(action, ' -> ', db_path)
             new_record(phone_book)
         elif action == '3':
-            search_db(input('Put the name: '))
+            name_id1 = input("Введите имя: ")
+            my_find(phone_book, name_id1)
         elif action == '4':
             init_db(db_path, phone_book)
         elif action == '5':
-            delete()
-            print('1. Найти номер по фамилии.')
-            print('2. Найти номер по имени.')
-            print('3. Поиск по номеру телефона.')
-            deleting = (input('Введите номер пункта: '))
-
-            if deleting == '1':
-                search = input('Введите фамилию: ')
-                user_id = input('Введите id записи: ')
-            elif deleting == '2':
-                search = input('Введите имя: ')
-                user_id = input('Введите id записи: ')
-
-            elif deleting == '3':
-                search = input('Введите номер телефона: ')
-                user_id = input('Введите id записи: ')
-                new_number = input('Введите новый номер телефона: ')
-
-            else:
-                print(
-                    '\nТакого пункта меню не существует.\nВведите цифру, соответствующую пункту меню.')
+            name = input("Put the name: ")
+            delete(phone_book, name)
+            # print('1. Find by name.')
+            # print('2. Find by phone number.')
+            # deleting = (input('Введите номер пункта: '))
+            # if deleting == '1':
+            #     delete()
+            # # elif deleting == '2':
+            # #     search = input('Введите номер телефона: ')
+            # #     delete()
+            # else:
+            #     print(
+            #         '\nТакого пункта меню не существует.\nВведите цифру, соответствующую пункту меню.')
 
 
 action()
