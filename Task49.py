@@ -102,7 +102,6 @@ def action():
         if action == '1':
             print(phone_book)
         elif action == '2':
-            # print(action, ' -> ', db_path)
             new_record(phone_book)
         elif action == '3':
             name_id1 = input("Введите имя: ")
@@ -112,18 +111,6 @@ def action():
         elif action == '5':
             name = input("Put the name: ")
             delete(phone_book, name)
-            # print('1. Find by name.')
-            # print('2. Find by phone number.')
-            # deleting = (input('Введите номер пункта: '))
-            # if deleting == '1':
-            #     delete()
-            # # elif deleting == '2':
-            # #     search = input('Введите номер телефона: ')
-            # #     delete()
-            # else:
-            #     print(
-            #         '\nТакого пункта меню не существует.\nВведите цифру, соответствующую пункту меню.')
-
-
+            
 action()
 save_db(db_path, phone_book)
